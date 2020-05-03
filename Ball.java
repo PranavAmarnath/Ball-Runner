@@ -33,7 +33,7 @@ public class Ball implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE) {
-            Main.ball_y -= 400;
+            Main.run();
         }
     }
 

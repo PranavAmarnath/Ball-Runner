@@ -9,6 +9,7 @@ public class DrawingBoard extends JPanel {
     private BufferedImage bImage;
     public static Graphics bufferedG;
     public int w, h;
+    public Image bg;
 
     public DrawingBoard(int w, int h) {
 		//SoundPlayer bgSound = new SoundPlayer(R_PATH + "bgMusic.wav");
@@ -23,8 +24,9 @@ public class DrawingBoard extends JPanel {
         bImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         bufferedG = bImage.getGraphics();
         ((Graphics2D) bufferedG).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        bufferedG.drawImage(bImage, 0, 0, null);
+
+        bg = new ImageIcon("grass.jpg").getImage();
+        //bufferedG.drawImage(bg, 0, 0, null);
 		frame.setVisible(true);
 	}
 
@@ -37,6 +39,8 @@ public class DrawingBoard extends JPanel {
     public void clear() {
         bufferedG.setColor(Color.WHITE);
         bufferedG.fillRect(0, 0, w, h);
+
+        bufferedG.drawImage(bg, 0, 0, null);
     }
 
     public JFrame getJFrame() {
