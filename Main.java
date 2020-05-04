@@ -12,6 +12,7 @@ public class Main {
     // Need to synchronize spacebar with ballRun();
 
     public static void main(String[] args) {
+        //board.clear();
         ballRun();
         ballRun();
         ball.isCollided = true;
