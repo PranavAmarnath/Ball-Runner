@@ -1,5 +1,3 @@
-package CompProgFinal;
-
 import javax.swing.*;
 
 import java.awt.*;

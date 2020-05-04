@@ -1,5 +1,3 @@
-package CompProgFinal;
-
 public class Main {
 
     public static boolean gameOn = true;
