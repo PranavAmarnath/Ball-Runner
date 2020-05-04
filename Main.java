@@ -2,21 +2,25 @@ public class Main {
 
     public static boolean gameOn = true;
     public static int score;
-    public static int ball_x = 20;
+    public static int ball_x = 50;
     public static int ball_y = 850;
     private static int steps = 20;
     public static DrawingBoard board = new DrawingBoard(1920, 1000);
     public static Ball ball = new Ball(ball_x, ball_y, 20, 10);
 
+    // Loading Problem at beginning -> have to fix
+    // Need to synchronize spacebar with ballRun();
+
     public static void main(String[] args) {
-        board.clear();
-        ball.draw();
-        board.addKeyListener(ball);
-        run();
+        ballRun();
+        ballRun();
+        ball.isCollided = true;
+        ball.isHit();
     }
 
-    public static void run() {
-        board.addKeyListener(ball);
+    public static void ballRun() {
+        board.clear();
+        ball.draw();
         for (int i = 0; i < steps; i++) {
             ball.move();
             try {

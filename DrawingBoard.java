@@ -8,7 +8,7 @@ public class DrawingBoard extends JPanel {
     private JFrame frame;
     private BufferedImage bImage;
     public static Graphics bufferedG;
-    public int w, h;
+    public static int w, h;
     public Image bg;
 
     public DrawingBoard(int w, int h) {
@@ -37,9 +37,6 @@ public class DrawingBoard extends JPanel {
     }
 
     public void clear() {
-        bufferedG.setColor(Color.WHITE);
-        bufferedG.fillRect(0, 0, w, h);
-
         bufferedG.drawImage(bg, 0, 0, null);
     }
 
