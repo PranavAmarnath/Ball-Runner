@@ -71,7 +71,7 @@ public class Ball implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
-        if (keyCode == KeyEvent.VK_SPACE) {
+        if (keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_UP) {
             //System.out.println("entered to act on space bar");
             ballOn = true;
             //System.out.println("finished acting on space bar");
