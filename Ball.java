@@ -8,7 +8,8 @@ public class Ball implements KeyListener {
     public int x, y;
     private int radius;
     private int stepSize;
-    public static boolean isCollided;
+    public boolean isCollided;
+    private int steps = 40;
     public Image explosion_large = new ImageIcon("explosion.png").getImage();
     public Image gameOver = new ImageIcon("gameOver2.png").getImage();
 
@@ -33,18 +34,45 @@ public class Ball implements KeyListener {
     }
 
     public void isHit() {
-        if (isCollided == true) {
+        if (isCollided) {
             DrawingBoard.bufferedG.drawImage(explosion_large, x-radius, y-radius, null);
             DrawingBoard.bufferedG.drawImage(gameOver, DrawingBoard.w/3, DrawingBoard.h/3, null);
         }
     }
-    
+
+    public void ballRun(DrawingBoard board) {
+        board.clear();
+        draw();
+        for (int i = 0; i < steps; i++) {
+            move();
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException e) {
+            }
+            board.clear();
+            draw();
+        }
+        board.repaint();
+        for (int i = 0; i < steps; i++) {
+            moveBack();
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException e) {
+            }
+            board.clear();
+            draw();
+        }
+        board.repaint();
+    }
+
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE) {
-            Main.ballRun();
+            ballRun(Main.board);
         }
+
+        System.out.println("Entered keyPressed method");
     }
 
     public void keyTyped(KeyEvent e) {
