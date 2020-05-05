@@ -5,21 +5,20 @@ import java.awt.event.KeyListener;
 
 public class Ball implements KeyListener {
 
-    public int x, y;
+    private int x, y;
     private int radius;
     private int stepSize;
     public boolean isCollided;
     private int steps = 40;
     public Image explosion_large = new ImageIcon("explosion.png").getImage();
     public Image gameOver = new ImageIcon("gameOver2.png").getImage();
-    private DrawingBoard board;
+    public static boolean ballOn = false;
 
-    public Ball(int x, int y, int radius, int stepSize, DrawingBoard board) {
+    public Ball(int x, int y, int radius, int stepSize) {
         this.x = x;
         this.y = y;
-        this.stepSize = stepSize;
         this.radius = radius;
-        this.board = board;
+        this.stepSize = stepSize;
     }
 
     public void draw() {
@@ -42,11 +41,12 @@ public class Ball implements KeyListener {
         }
     }
 
-    public void ballRun() {
+    public void ballRun(DrawingBoard board) {
         board.clear();
         draw();
         for (int i = 0; i < steps; i++) {
             move();
+            System.out.println(y);
             try {
                 Thread.sleep(40);
             } catch (InterruptedException e) {
@@ -72,7 +72,9 @@ public class Ball implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE) {
-            this.ballRun();
+            System.out.println("entered space part");
+            ballOn = true;
+            System.out.println("finished acting on space bar");
         }
     }
 

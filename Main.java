@@ -10,19 +10,25 @@ public class Main {
     public static Ball ball;
 
     // TODO: Loading Problem at beginning
-    // TODO: Need to synchronize spacebar with ballRun();
+    // TODO: Need to synchronize space bar with ballRun();
 
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
-        ball = new Ball(ball_x, ball_y, 20, 5, board);
+        ball = new Ball(ball_x, ball_y, 20, 5);
         board.getJFrame().addKeyListener(ball);
-        board.clear();
-        ball.draw();
-        board.repaint();
+        while(true) {
+            board.clear();
+            ball.draw();
+            board.repaint();
+            while (ball.ballOn) {
+                ball.ballRun(board);
+                ball.ballOn = false;
+            }
 //        ball.ballRun(board);
 //        ball.ballRun(board);
 //        ball.isCollided = true;
-        ball.isHit();
+            ball.isHit();
+        }
     }
 
 }
