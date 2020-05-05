@@ -55,7 +55,7 @@ public class Ball implements KeyListener {
         board.clear();
         draw();
         board.repaint();
-        System.out.println("reached");
+        //System.out.println("reached");
         for (int i = 0; i < steps; i++) {
             moveBack();
             try {
