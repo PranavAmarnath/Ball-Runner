@@ -12,12 +12,14 @@ public class Ball implements KeyListener {
     private int steps = 40;
     public Image explosion_large = new ImageIcon("explosion.png").getImage();
     public Image gameOver = new ImageIcon("gameOver2.png").getImage();
+    private DrawingBoard board;
 
-    public Ball(int x, int y, int radius, int stepSize) {
+    public Ball(int x, int y, int radius, int stepSize, DrawingBoard board) {
         this.x = x;
         this.y = y;
         this.stepSize = stepSize;
         this.radius = radius;
+        this.board = board;
     }
 
     public void draw() {
@@ -40,7 +42,7 @@ public class Ball implements KeyListener {
         }
     }
 
-    public void ballRun(DrawingBoard board) {
+    public void ballRun() {
         board.clear();
         draw();
         for (int i = 0; i < steps; i++) {
@@ -49,10 +51,11 @@ public class Ball implements KeyListener {
                 Thread.sleep(40);
             } catch (InterruptedException e) {
             }
-            board.clear();
-            draw();
         }
+        board.clear();
+        draw();
         board.repaint();
+        System.out.println("reached");
         for (int i = 0; i < steps; i++) {
             moveBack();
             try {
@@ -69,10 +72,8 @@ public class Ball implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE) {
-            ballRun(Main.board);
+            this.ballRun();
         }
-
-        System.out.println("Entered keyPressed method");
     }
 
     public void keyTyped(KeyEvent e) {

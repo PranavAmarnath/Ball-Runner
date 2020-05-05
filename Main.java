@@ -14,9 +14,11 @@ public class Main {
 
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
-        ball = new Ball(ball_x, ball_y, 20, 5);
+        ball = new Ball(ball_x, ball_y, 20, 5, board);
         board.getJFrame().addKeyListener(ball);
-//        board.clear();
+        board.clear();
+        ball.draw();
+        board.repaint();
 //        ball.ballRun(board);
 //        ball.ballRun(board);
 //        ball.isCollided = true;

@@ -31,9 +31,8 @@ public class DrawingBoard extends JPanel {
 	}
 
     public void paintComponent(Graphics g) {
-
+        super.paintComponent(g);
         g.drawImage(bImage, 0, 0, null);
-
     }
 
     public void clear() {
