@@ -46,11 +46,11 @@ public class Ball implements KeyListener {
         draw();
         for (int i = 0; i < steps; i++) {
             move();
-            System.out.println(y);
-            try {
-                Thread.sleep(40);
-            } catch (InterruptedException e) {
-            }
+            //System.out.println(y);
+            //try {
+               // Thread.sleep(40);
+            //} catch (InterruptedException e) {
+          //  }
         }
         board.clear();
         draw();
@@ -72,9 +72,9 @@ public class Ball implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE) {
-            System.out.println("entered to act on space bar");
+            //System.out.println("entered to act on space bar");
             ballOn = true;
-            System.out.println("finished acting on space bar");
+            //System.out.println("finished acting on space bar");
         }
     }
 
