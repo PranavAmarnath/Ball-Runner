@@ -28,6 +28,9 @@ public class Main {
 //        ball.ballRun(board);
 //        ball.isCollided = true;
             ball.isHit();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) { }
         }
     }
 
