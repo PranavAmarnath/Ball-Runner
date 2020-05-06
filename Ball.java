@@ -36,8 +36,8 @@ public class Ball implements KeyListener {
 
     public void isHit() {
         if (isCollided) {
-            DrawingBoard.bufferedG.drawImage(explosion_large, x-radius, y-radius, null);
-            DrawingBoard.bufferedG.drawImage(gameOver, DrawingBoard.w/3, DrawingBoard.h/3, null);
+            DrawingBoard.getCanvas().drawImage(explosion_large, x-radius, y-radius, null);
+            DrawingBoard.getCanvas().drawImage(gameOver, DrawingBoard.w/3, DrawingBoard.h/3, null);
         }
     }
 

@@ -25,7 +25,7 @@ public class Obstacle {
 	public void drawOb(Graphics g) {
 		g.setColor(color);
 		g.fillRect(x, y, width, height);
-		g.setColor(Color.BLACK);
+		g.setColor(color);
 		g.drawRect(x, y, width, height);
 	}
 }

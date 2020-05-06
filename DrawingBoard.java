@@ -43,7 +43,7 @@ public class DrawingBoard extends JPanel {
         return frame;
     }
 
-    public Graphics getCanvas() {
+    public static Graphics getCanvas() {
         return bufferedG;
     }
 
