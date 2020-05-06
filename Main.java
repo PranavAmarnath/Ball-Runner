@@ -9,9 +9,6 @@ public class Main {
     public static DrawingBoard board;
     public static Ball ball;
 
-    // TODO: Loading Problem at beginning
-    // TODO: Need to synchronize space bar with ballRun();
-
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
         ball = new Ball(ball_x, ball_y, 20, 5);
