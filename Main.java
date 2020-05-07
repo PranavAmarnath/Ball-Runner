@@ -5,8 +5,8 @@ public class Main {
 
     public static boolean gameOn = true;
     public static int score;
-    private static final int w = 1728;
-    private static final int h = 972;
+    private static final int w = 1024;
+    private static final int h = 576;
     public static int ball_x = 50;
     public static int ball_y = (h - 150);
     public static int obstacle_width = 50;
@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
-        ball = new Ball(ball_x, ball_y, 20, 200);
+        ball = new Ball(ball_x, ball_y, 15, 200);
         sound = new SoundPlayer();
         bgSound = new File("jack_low.wav");
         boing = new File("boing.wav");
