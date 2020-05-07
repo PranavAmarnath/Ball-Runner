@@ -17,7 +17,7 @@ public class DrawingBoard extends JPanel {
         this.w = w;
         this.h = h;
 		frame = new JFrame("Ball Runner");
-		frame.setBounds(0, -1, w, h);
+		frame.setBounds(0, 0, w, h);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(this);
 		

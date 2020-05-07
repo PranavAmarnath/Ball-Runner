@@ -32,7 +32,7 @@ public class Main {
             ball.draw();
             board.repaint();
             while (ball.ballOn) {
-                SoundPlayer.playSound(boing);
+                sound.playSound(boing);
                 ball.ballRun(board);
                 ball.ballOn = false;
             }
