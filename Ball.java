@@ -10,7 +10,7 @@ public class Ball implements KeyListener {
     private int stepSize;
     public boolean isCollided;
     //private int steps = 40;
-    public Image explosion_large = new ImageIcon("explosion.png").getImage();
+    public Image explosion_large = new ImageIcon("explosion_nontransparent.png").getImage();
     public Image gameOver = new ImageIcon("gameOver2.png").getImage();
     public static boolean ballOn = false;
 
@@ -36,8 +36,9 @@ public class Ball implements KeyListener {
 
     public void isHit() {
         if (isCollided) {
-            DrawingBoard.getCanvas().drawImage(explosion_large, x-radius, y-radius, null);
-            DrawingBoard.getCanvas().drawImage(gameOver, DrawingBoard.w/3, DrawingBoard.h/3, null);
+            Main.ball = null;
+            DrawingBoard.getCanvas().drawImage(explosion_large, x-2*radius, y-2*radius, null);
+            DrawingBoard.getCanvas().drawImage(gameOver, DrawingBoard.w/4, DrawingBoard.h/4, null);
             Main.gameOn = false;
         }
     }
