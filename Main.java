@@ -3,6 +3,8 @@ import java.io.File;
 
 public class Main {
 
+    // NOTE: THIS CLASS USES JDK 14. WHEN RUNNING, USE JDK 14. DO NOT USE JDK 9 OR PREVIOUS VERSIONS OF JAVA TO JDK 9.
+
     public static boolean gameOn = true;
     public static int score;
     private static final int w = 1024;
