@@ -9,7 +9,7 @@ public class Ball implements KeyListener {
     private int radius;
     private int stepSize;
     public boolean isCollided;
-    private int steps = 40;
+    //private int steps = 40;
     public Image explosion_large = new ImageIcon("explosion.png").getImage();
     public Image gameOver = new ImageIcon("gameOver2.png").getImage();
     public static boolean ballOn = false;
@@ -22,8 +22,8 @@ public class Ball implements KeyListener {
     }
 
     public void draw() {
-        DrawingBoard.bufferedG.setColor(Color.CYAN);
-        DrawingBoard.bufferedG.fillOval(x, y, 2 * radius, 2 * radius);
+        DrawingBoard.getCanvas().setColor(Color.CYAN);
+        DrawingBoard.getCanvas().fillOval(x, y, 2 * radius, 2 * radius);
     }
 
     public void move() {
@@ -44,26 +44,20 @@ public class Ball implements KeyListener {
     public void ballRun(DrawingBoard board) {
         board.clear();
         draw();
-        for (int i = 0; i < steps; i++) {
-            move();
-            //System.out.println(y);
-            //try {
-               // Thread.sleep(40);
-            //} catch (InterruptedException e) {
-          //  }
-        }
+        move();
         board.clear();
         draw();
         board.repaint();
-        //System.out.println("reached");
-        for (int i = 0; i < steps; i++) {
-            moveBack();
-            try {
-                Thread.sleep(40);
-            } catch (InterruptedException e) {
-            }
-            board.clear();
-            draw();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
+        moveBack();
+        board.clear();
+        draw();
+        try {
+            Thread.sleep(1400);
+        } catch (InterruptedException e) {
         }
         board.repaint();
     }
