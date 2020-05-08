@@ -6,26 +6,27 @@ public class Obstacle {
 	
 	private int x, y;
 	private static int width, height;
-	private Color color;
 	private static int vX;
+	//private Color color;
 	//private static Image image;
+
+	public static final Color BROWN = new Color(102, 51, 0);
 	
 	static {
-		width = 100;
 		height = 100;
+		width = height/ 2;
 		vX = 10;
 	}
 	
-	public Obstacle(int x1, int y1, int w, int h, Color c) {
+	public Obstacle(int x1, int y1, int w, int h) {
 		x = x1;
 		y = y1;
-		color = c;
 	}
 	
 	public void drawOb(Graphics g) {
-		g.setColor(color);
+		g.setColor(BROWN);
 		g.fillRect(x, y, width, height);
-		g.setColor(color);
+		g.setColor(BROWN);
 		g.drawRect(x, y, width, height);
 	}
 }

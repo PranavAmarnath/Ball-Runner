@@ -26,11 +26,12 @@ public class Main {
         Thread t = new Thread(sound);
         t.start();
         //boing = new File("boing.wav");
-        obstacle = new Obstacle(w - obstacle_width, h - obstacle_height, obstacle_width, obstacle_height, Color.BLACK);
+        obstacle = new Obstacle(800, 350, obstacle_width, obstacle_height);
         board.getJFrame().addKeyListener(ball);
         while(gameOn) {
             board.clear();
             ball.draw();
+            obstacle.drawOb(DrawingBoard.getCanvas());;
             board.repaint();
             while (ball.ballOn) {
                 //sound.playSound(boing);
