@@ -11,8 +11,8 @@ public class Main {
     private static final int h = 576;
     public static int ball_x = 50;
     public static int ball_y = (h - 150);
-    public static int obstacle_width = 50;
     public static int obstacle_height = 100;
+    public static int obstacle_width = obstacle_height/2;
     public static DrawingBoard board;
     public static Ball ball;
     public static Obstacle obstacle;
@@ -31,7 +31,7 @@ public class Main {
         while(gameOn) {
             board.clear();
             ball.draw();
-            obstacle.drawOb(DrawingBoard.getCanvas());;
+            obstacle.drawOb(DrawingBoard.getCanvas());
             board.repaint();
             while (ball.ballOn) {
                 //sound.playSound(boing);
