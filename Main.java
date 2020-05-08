@@ -17,24 +17,23 @@ public class Main {
     public static Ball ball;
     public static Obstacle obstacle;
     private static SoundPlayer sound;
-    private static File bgSound;
-    private static File boing;
+    //private static File boing;
 
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
         ball = new Ball(ball_x, ball_y, 15, 200);
         sound = new SoundPlayer();
-        bgSound = new File("jack_low.wav");
-        boing = new File("boing.wav");
+        Thread t = new Thread(sound);
+        t.start();
+        //boing = new File("boing.wav");
         obstacle = new Obstacle(w - obstacle_width, h - obstacle_height, obstacle_width, obstacle_height, Color.BLACK);
         board.getJFrame().addKeyListener(ball);
-        //SoundPlayer.playSound(bgSound);
         while(gameOn) {
             board.clear();
             ball.draw();
             board.repaint();
             while (ball.ballOn) {
-                sound.playSound(boing);
+                //sound.playSound(boing);
                 ball.ballRun(board);
                 ball.ballOn = false;
             }
