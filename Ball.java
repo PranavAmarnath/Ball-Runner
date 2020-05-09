@@ -26,6 +26,11 @@ public class Ball implements KeyListener {
         DrawingBoard.getCanvas().fillOval(x, y, 2 * radius, 2 * radius);
     }
 
+    public void draw(int x, int y) {
+        DrawingBoard.getCanvas().setColor(Color.CYAN);
+        DrawingBoard.getCanvas().fillOval(x, y, 2 * radius, 2 * radius);
+    }
+
     public void move() {
         y -= stepSize;
     }
@@ -41,27 +46,6 @@ public class Ball implements KeyListener {
             DrawingBoard.getCanvas().drawImage(gameOver, DrawingBoard.w/4, DrawingBoard.h/4, null);
             Main.gameOn = false;
         }
-    }
-
-    public void ballRun(DrawingBoard board) {
-        board.clear();
-        draw();
-        move();
-        board.clear();
-        draw();
-        board.repaint();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-        }
-        moveBack();
-        board.clear();
-        draw();
-        try {
-            Thread.sleep(1400);
-        } catch (InterruptedException e) {
-        }
-        board.repaint();
     }
 
     public void keyPressed(KeyEvent e) {

@@ -11,33 +11,61 @@ public class Main {
     private static final int h = 576;
     public static int ball_x = 50;
     public static int ball_y = (h - 150);
-    public static int obstacle_width = 50;
     public static int obstacle_height = 100;
+    public static int obstacle_width = obstacle_height/2;
     public static DrawingBoard board;
     public static Ball ball;
     public static Obstacle obstacle;
+    //public static ObstacleManager manager;
     private static SoundPlayer sound;
     //private static File boing;
 
     public static void main(String[] args) {
-        Thread obstacleThread = new Thread(obstacles);
-        obstacleThread.start();
         board = new DrawingBoard(w, h);
         ball = new Ball(ball_x, ball_y, 15, 200);
+        //manager = new ObstacleManager();
         sound = new SoundPlayer();
         Thread t = new Thread(sound);
         t.start();
+        //Thread managerThread = new Thread(manager);
         //boing = new File("boing.wav");
-        //obstacle = new Obstacle(800, 350, obstacle_width, obstacle_height);
+        obstacle = new Obstacle(800, 350, obstacle_width, obstacle_height);
         board.getJFrame().addKeyListener(ball);
         while(gameOn) {
             board.clear();
             ball.draw();
-            obstacle.drawOb(DrawingBoard.getCanvas());;
+            //managerThread.start();
+            obstacle.drawOb();
+            obstacle.move();
             board.repaint();
-            while (ball.ballOn) {
+            if(ball.ballOn) {
                 //sound.playSound(boing);
-                ball.ballRun(board);
+                board.clear();
+                ball.draw();
+                obstacle.drawOb();
+                obstacle.move();
+                ball.move();
+                board.clear();
+                ball.draw();
+                obstacle.drawOb();
+                obstacle.move();
+                board.repaint();
+                for(int i = 0; i < 10; i++) {
+                    obstacle.drawOb();
+                    obstacle.move();
+                    ball.draw();
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) { }
+                    board.clear();
+                    board.repaint();
+                }
+                ball.moveBack();
+                board.clear();
+                ball.draw();
+                obstacle.drawOb();
+                obstacle.move();
+                board.repaint();
                 ball.ballOn = false;
             }
             //ball.isCollided = true;
@@ -45,6 +73,9 @@ public class Main {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) { }
+            /*try {
+                managerThread.sleep(50);
+            } catch (InterruptedException e) { }*/
         }
     }
 

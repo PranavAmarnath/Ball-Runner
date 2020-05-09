@@ -23,8 +23,13 @@ public class Obstacle {
 		height = h;
 	}
 	
-	public void drawOb(Graphics g) {
-		g.setColor(BROWN);
-		g.fillRect(x, y, width, height);
+	public void drawOb() {
+		DrawingBoard.getCanvas().setColor(BROWN);
+		DrawingBoard.getCanvas().fillRect(x, y, width, height);
 	}
+
+	public void move() {
+		x -= vX;
+	}
+
 }
