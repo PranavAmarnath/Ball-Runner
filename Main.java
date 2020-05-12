@@ -23,18 +23,15 @@ public class Main {
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
         ball = new Ball(ball_x, ball_y, 15, 200);
-        //manager = new ObstacleManager();
         sound = new SoundPlayer();
         Thread t = new Thread(sound);
         t.start();
-        //Thread managerThread = new Thread(manager);
         //boing = new File("boing.wav");
-        obstacle = new Obstacle(800, 350, obstacle_width, obstacle_height);
+        obstacle = new Obstacle(800, 360, obstacle_width, obstacle_height);
         board.getJFrame().addKeyListener(ball);
         while(gameOn) {
             board.clear();
             ball.draw();
-            //managerThread.start();
             obstacle.drawOb();
             obstacle.move();
             board.repaint();
@@ -68,14 +65,10 @@ public class Main {
                 board.repaint();
                 ball.ballOn = false;
             }
-            //ball.isCollided = true;
-            //ball.isHit();
+            ball.isHit();
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) { }
-            /*try {
-                managerThread.sleep(50);
-            } catch (InterruptedException e) { }*/
         }
     }
 

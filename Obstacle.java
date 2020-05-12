@@ -26,10 +26,16 @@ public class Obstacle {
 	public void drawOb() {
 		DrawingBoard.getCanvas().setColor(BROWN);
 		DrawingBoard.getCanvas().fillRect(x, y, width, height);
+		Main.ball.isHit();
 	}
 
 	public void move() {
 		x -= vX;
+		Main.ball.isHit();
 	}
+
+	public int getX() { return x; }
+	public int getY() { return y; }
+	public int getWidth() { return width; }
 
 }
