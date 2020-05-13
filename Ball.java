@@ -37,7 +37,7 @@ public class Ball implements KeyListener {
     }
 
     public void isHit() {
-        if(center_x >= Main.obstacle.getX()-radius && center_y >= Main.obstacle.getY()-radius && center_x <= Main.obstacle.getX()+Main.obstacle.getWidth()+radius) {
+        if(center_x >= Main.obstacles[Main.getIndex()].getX()-radius && center_y >= Main.obstacles[Main.getIndex()].getY()-radius && center_x <= Main.obstacles[Main.getIndex()].getX()+Main.obstacles[Main.getIndex()].getWidth()+radius) {
             isCollided = true;
         }
         if (isCollided) {
