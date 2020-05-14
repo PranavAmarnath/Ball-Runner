@@ -47,12 +47,12 @@ public class Main {
                 obstacle.drawOb();
                 obstacle.move();
                 board.repaint();
-                for(int i = 0; i < 10; i++) {
+                for(int i = 0; i < 15; i++) {
                     obstacle.drawOb();
                     obstacle.move();
                     ball.draw();
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(60);
                     } catch (InterruptedException e) { }
                     board.clear();
                     board.repaint();
@@ -67,7 +67,7 @@ public class Main {
             }
             ball.isHit();
             try {
-                Thread.sleep(50);
+                Thread.sleep(60);
             } catch (InterruptedException e) { }
         }
     }

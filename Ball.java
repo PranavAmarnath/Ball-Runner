@@ -7,8 +7,6 @@ public class Ball implements KeyListener {
 
     private int x, y;
     private int radius;
-    private int center_x = x + radius;
-    private int center_y = y + radius;
     private int stepSize;
     public boolean isCollided;
     //private int steps = 40;
@@ -24,7 +22,7 @@ public class Ball implements KeyListener {
     }
 
     public void draw() {
-        DrawingBoard.getCanvas().setColor(Color.CYAN);
+        DrawingBoard.getCanvas().setColor(Color.BLUE);
         DrawingBoard.getCanvas().fillOval(x, y, 2 * radius, 2 * radius);
     }
 
@@ -37,13 +35,17 @@ public class Ball implements KeyListener {
     }
 
     public void isHit() {
-        if(center_x >= Main.obstacle.getX()-radius && center_y >= Main.obstacle.getY()-radius && center_x <= Main.obstacle.getX()+Main.obstacle.getWidth()+radius) {
+        int center_x = x + radius;
+        int center_y = y + radius;
+        if(center_x >= Main.obstacle.getX()-radius
+                && center_y >= Main.obstacle.getY()-radius
+                && center_x <= Main.obstacle.getX()+Main.obstacle.getWidth()+radius) {
             isCollided = true;
         }
         if (isCollided) {
+            Main.gameOn = false;
             DrawingBoard.getCanvas().drawImage(explosion_large, x-2*radius, y-2*radius, null);
             DrawingBoard.getCanvas().drawImage(gameOver, DrawingBoard.w/4, DrawingBoard.h/4, null);
-            Main.gameOn = false;
         }
     }
 
