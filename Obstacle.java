@@ -6,7 +6,7 @@ public class Obstacle {
 	
 	private int x, y;
 	private static int width, height;
-	private static int vX;
+	public static int vX;
 	//private Color color;
 	//private static Image image;
 
