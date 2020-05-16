@@ -3,9 +3,10 @@ import java.io.File;
 
 public class Main {
 
-    // NOTE: THIS CLASS USES JDK 14. WHEN RUNNING, USE JDK 14. DO NOT USE JDK 9 OR PREVIOUS VERSIONS OF JAVA TO JDK 9.
+    // NOTE: THIS CLASS USES JDK 14. WHEN RUNNING, USE JDK 14. DO NOT USE JDK 9 OR
+    // PREVIOUS VERSIONS OF JAVA TO JDK 9.
 
-	private static int index;
+    private static int index;
     public static boolean gameOn = true;
     public static int score;
     private static final int w = 1024;
@@ -13,13 +14,14 @@ public class Main {
     public static int ball_x = 50;
     public static int ball_y = (h - 150);
     public static int obstacles_height = 100;
-    public static int obstacles_width = obstacles_height/2;
+    public static int obstacles_width = obstacles_height / 2;
     public static DrawingBoard board;
     public static Ball ball;
     public static Obstacle[] obstacles = new Obstacle[10];
-    //public static obstaclessManager manager;
+    public static boolean welcome; 
+    // public static obstaclessManager manager;
     private static SoundPlayer sound;
-    //private static File boing;
+    // private static File boing;
 
     public static void main(String[] args) {
         board = new DrawingBoard(w, h);
@@ -27,10 +29,16 @@ public class Main {
         sound = new SoundPlayer();
         Thread t = new Thread(sound);
         t.start();
-        //boing = new File("boing.wav");
-        for(int i=0; i<obstacles.length;i++) obstacles[i] = new Obstacle(800, 360, obstacles_width, obstacles_height);
-        index = (int) (Math.random()*obstacles.length);
+        // boing = new File("boing.wav");
+        for (int i = 0; i < obstacles.length; i++)
+            obstacles[i] = new Obstacle(800, 360, obstacles_width, obstacles_height);
+        index = (int) (Math.random() * obstacles.length);
         board.getJFrame().addKeyListener(ball);
+        board.clear();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) { }
+        DrawingBoard.alpha = 0;
         while(gameOn) {
             board.clear();
             ball.draw();
