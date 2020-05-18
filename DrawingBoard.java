@@ -6,9 +6,13 @@ import java.awt.event.*;
 
 public class DrawingBoard extends JPanel implements KeyListener/*implements ActionListener*/ {
 
-    private JFrame frame;
-    private BufferedImage bImage;
-    public static Graphics bufferedG;
+    // Referenced code from https://docs.oracle.com/javase/7/docs/api/javax/swing/JComponent.html to learn about Swing
+    
+    private JFrame frame; // Referenced code from https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html to learn about JFrame
+
+    private BufferedImage bImage; // Referenced code from https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html to learn about BufferedImage
+
+    public static Graphics bufferedG; // Referenced code from https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html to learn about Graphics
     public static int w, h;
     public Image bg;
     public static int alpha = 255;
@@ -25,7 +29,7 @@ public class DrawingBoard extends JPanel implements KeyListener/*implements Acti
         frame.getContentPane().add(this);
         frame.addKeyListener(this);
 
-        bImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        bImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB); 
         bufferedG = bImage.getGraphics();
         ((Graphics2D) bufferedG).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -34,7 +38,7 @@ public class DrawingBoard extends JPanel implements KeyListener/*implements Acti
         //frame.add(button);
         //button.addActionListener(this);
 
-        bg = new ImageIcon("grass.jpg").getImage();
+        bg = new ImageIcon("grass.jpg").getImage(); // Referenced code from https://docs.oracle.com/javase/7/docs/api/javax/swing/ImageIcon.html to learn about ImageIcon
         //bufferedG.drawImage(bg, 0, 0, null);
         frame.setVisible(true);
     }

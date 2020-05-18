@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Ball implements KeyListener {
+public class Ball implements KeyListener /* Referenced code from https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyListener.html to learn about KeyListener */ {
 
     /* Key Concept: Object-Oriented Programming
        Used to create different objects such as the Ball object.
