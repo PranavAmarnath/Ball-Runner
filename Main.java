@@ -7,7 +7,8 @@ public class Main {
     // PREVIOUS VERSIONS OF JAVA TO JDK 9.
 
     private static int index;
-    public static boolean gameOn = true;
+    public static boolean gameOn = false;
+    public static boolean gameOn1 = true;
     public static int score;
     private static final int w = 1024;
     private static final int h = 576;
@@ -33,13 +34,21 @@ public class Main {
         for (int i = 0; i < obstacles.length; i++)
             obstacles[i] = new Obstacle(800, 360, obstacles_width, obstacles_height);
         index = (int) (Math.random() * obstacles.length);
-        board.getJFrame().addKeyListener(ball);
+        //board.getJFrame().addKeyListener(ball);
         board.clear();
-        try {
+        /*try {
             Thread.sleep(5000);
-        } catch (InterruptedException e) { }
-        DrawingBoard.alpha = 0;
+        } catch (InterruptedException e) { }*/
+        //DrawingBoard.alpha = 0;
+        //System.out.println("Reached Welcome Screen");
+	    while(gameOn==false) { 
+	    	System.out.println();
+	    }
+	    if(gameOn) {
+	    	board.getJFrame().addKeyListener(ball);
+	    }
         while(gameOn) {
+        	//System.out.println("Entered gameOn");
             board.clear();
             ball.draw();
             obstacles[index].drawOb();
@@ -57,7 +66,7 @@ public class Main {
                 obstacles[index].drawOb();
                 obstacles[index].move();
                 board.repaint();
-                for(int i = 0; i < 15; i++) {
+                for(int i = 0; i < 13; i++) {
                     obstacles[index].drawOb();
                     obstacles[index].move();
                     ball.draw();
@@ -83,6 +92,7 @@ public class Main {
             	index = (int) (Math.random()*obstacles.length);
             	obstacles[index].drawOb();
                 obstacles[index].move();
+                obstacles[index].vX++;
                 board.repaint();
             }
         }

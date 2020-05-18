@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 
-public class DrawingBoard extends JPanel /*implements ActionListener*/ {
+public class DrawingBoard extends JPanel implements KeyListener/*implements ActionListener*/ {
 
     private JFrame frame;
     private BufferedImage bImage;
@@ -23,6 +23,7 @@ public class DrawingBoard extends JPanel /*implements ActionListener*/ {
         frame.setBounds(0, 0, w, h);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(this);
+        frame.addKeyListener(this);
 
         bImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         bufferedG = bImage.getGraphics();
@@ -44,6 +45,8 @@ public class DrawingBoard extends JPanel /*implements ActionListener*/ {
         g.setColor(new Color(0, 0, 0, alpha));
         g.setFont(new Font("times", Font.BOLD, 50));
         g.drawString("Welcome to Ball Runner!", 190, 250);
+        g.setFont(new Font("times", Font.BOLD, 30));
+        g.drawString("PRESS SPACE TO START", 300, 300);
     }
 
     public void clear() {
@@ -57,6 +60,28 @@ public class DrawingBoard extends JPanel /*implements ActionListener*/ {
     public static Graphics getCanvas() {
         return bufferedG;
     }
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			DrawingBoard.alpha = 0;
+			Main.gameOn = true;
+			//System.out.println("Typed");
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
     /*public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
