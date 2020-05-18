@@ -5,6 +5,10 @@ import java.awt.event.KeyListener;
 
 public class Ball implements KeyListener {
 
+    /* Key Concept: Object-Oriented Programming
+       Used to create different objects such as the Ball object.
+       Balls in our game have similar characteristics such as radius and stepSize.
+    */
     private int x, y;
     private int radius;
     private int stepSize;
@@ -15,6 +19,11 @@ public class Ball implements KeyListener {
     public static boolean ballOn = false;
 
     public Ball(int x, int y, int radius, int stepSize) {
+        /*
+           Domain: x, y, radius, stepSize of type integer
+           Range: no return type but allows for initialization of Ball object
+           Explanation: The purpose of this method is to set constructor variables to the instance variables.
+        */
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -50,6 +59,10 @@ public class Ball implements KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
+        /*
+           User Input: The user can either press the up arrow key or the space bar key.
+           How it's used: The commands are used to cause the ball to jump to avoid the obstacles.
+        */
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_UP) {

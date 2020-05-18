@@ -47,6 +47,10 @@ public class Main {
 	    if(gameOn) {
 	    	board.getJFrame().addKeyListener(ball);
 	    }
+	    /* Key Concept: Iteration
+	       Iteration is used to implement a complete looping structure until the game ends when
+	       the ball collides with an obstacle.
+	    */
         while(gameOn) {
         	//System.out.println("Entered gameOn");
             board.clear();

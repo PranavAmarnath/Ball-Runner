@@ -4,6 +4,10 @@ import java.io.File;
 public class SoundPlayer implements Runnable {
 
     private void playBgSound(String fileName) {
+        /*
+           Domain: filename of type String
+           Range: void type, output: plays background music on its own thread
+        */
         try {
             File soundFile = new File(fileName);
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);

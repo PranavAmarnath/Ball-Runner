@@ -71,12 +71,15 @@ public class DrawingBoard extends JPanel implements KeyListener/*implements Acti
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+        /*
+           User Input: The user can press the space bar key to move on from the welcome screen to the actual
+           game itself.
+        */
 		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 			DrawingBoard.alpha = 0;
 			Main.gameOn = true;
 			//System.out.println("Typed");
 		}
-		
 	}
 
 	@Override
