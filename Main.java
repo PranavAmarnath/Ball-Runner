@@ -42,7 +42,7 @@ public class Main {
         //DrawingBoard.alpha = 0;
         //System.out.println("Reached Welcome Screen");
 	    while(gameOn==false) { 
-	    	System.out.println();
+	    	board.clear();
 	    }
 	    if(gameOn) {
 	    	board.getJFrame().addKeyListener(ball);
