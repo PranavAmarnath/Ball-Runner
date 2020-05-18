@@ -47,6 +47,8 @@ public class DrawingBoard extends JPanel implements KeyListener/*implements Acti
         g.drawString("Welcome to Ball Runner!", 190, 250);
         g.setFont(new Font("times", Font.BOLD, 30));
         g.drawString("PRESS SPACE TO START", 300, 300);
+        g.setFont(new Font("times", Font.BOLD, 20));
+        g.drawString("Tip:Press up arrow or SPACE to bounce the ball", 500, 500);
     }
 
     public void clear() {

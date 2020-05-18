@@ -4,9 +4,9 @@ public class Obstacle {
 
 	// READ THIS BEFORE CHANGES ARE MADE: THIS IS A STARTER FILE. IT WILL EVENTUALLY BECOME AN ABSTRACT CLASS WITH AN IMAGE.
 	
-	private int x, y;
+	private int x, y, x1;
 	private static int width, height;
-	public static int vX;
+	public static double vX;
 	//private Color color;
 	//private static Image image;
 
@@ -18,6 +18,7 @@ public class Obstacle {
 	
 	public Obstacle(int x1, int y1, int w, int h) {
 		x = x1;
+		this.x1 = x1;
 		y = y1;
 		width = w;
 		height = h;
@@ -37,5 +38,6 @@ public class Obstacle {
 	public int getX() { return x; }
 	public int getY() { return y; }
 	public int getWidth() { return width; }
+	public void reset() {x = x1;}
 
 }

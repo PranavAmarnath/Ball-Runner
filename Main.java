@@ -33,7 +33,7 @@ public class Main {
         // boing = new File("boing.wav");
         for (int i = 0; i < obstacles.length; i++)
             obstacles[i] = new Obstacle(800, 360, obstacles_width, obstacles_height);
-        index = (int) (Math.random() * obstacles.length);
+        index = (int) (Math.random() * (obstacles.length-1));
         //board.getJFrame().addKeyListener(ball);
         board.clear();
         /*try {
@@ -89,10 +89,11 @@ public class Main {
                 Thread.sleep(60);
             } catch (InterruptedException e) { }
             if(obstacles[index].getX()<board.getX()) {
+            	obstacles[index].reset();
             	index = (int) (Math.random()*obstacles.length);
             	obstacles[index].drawOb();
                 obstacles[index].move();
-                obstacles[index].vX++;
+                obstacles[index].vX+=0.7;
                 board.repaint();
             }
         }
