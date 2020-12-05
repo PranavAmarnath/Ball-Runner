@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="jrJavaLib1">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../JrJavaNeon/eclipseWS/Student/jrJavaLib.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
