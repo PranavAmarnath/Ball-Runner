@@ -13,6 +13,8 @@ import java.net.URL;
 class Main extends JPanel {
 
     JFrame frame;
+    int width = 1024;
+    int height = 576;
     JMenuBar menuBar;
     JMenu fileMenu, preferencesMenu;
     JMenuItem restartItem, colorBallItem, colorObstacleItem;
@@ -22,17 +24,9 @@ class Main extends JPanel {
     JPanel mainPanel, textPanel, gamePanel;
     JLabel level;
     int currentLevel = 1;
-    int width = 1024;
-    int height = 576;
-    final int oX = 20;
-    final int oY = 430;
-    int x = oX;
-    int y = oY;
-    int radius = 15;
-    final int originaldy = 10;
-    int dy = originaldy;
     Timer timerUp, timerDown;
     Action spacePressedUp;
+    Ball ball;
     Obstacle obstacle = new Obstacle();
     Timer obstacleMove;
     boolean isCollided = false;
@@ -44,39 +38,18 @@ class Main extends JPanel {
     public Main() {
         createAndShowGUI();
 
-        timerUp = new Timer(50, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                moveUp();
-                repaint();
-            }
-        });
-
-        spacePressedUp = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                timerUp.start();
-            }
-        };
-
-        timerDown = new Timer(50, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                moveDown();
-                repaint();
-            }
-        });
-
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
-        getActionMap().put("pressed", spacePressedUp);
+        ball = new Ball();
 
         obstacleMove = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 obstacle.move();
                 //repaint(obstacle.oX, obstacle.y, obstacle.width, obstacle.height);
                 repaint();
-                int center_x = x + radius;
-                int center_y = y + radius;
-                if(center_x >= obstacle.x-radius
-                    && center_y >= obstacle.y-radius
-                    && center_x <= obstacle.x+obstacle.width+radius) {
+                int center_x = ball.x + ball.radius;
+                int center_y = ball.y + ball.radius;
+                if(center_x >= obstacle.x-ball.radius
+                    && center_y >= obstacle.y-ball.radius
+                    && center_x <= obstacle.x+obstacle.width+ball.radius) {
                         isCollided = true;
                 }
                 if(isCollided) {
@@ -117,13 +90,13 @@ class Main extends JPanel {
                 timerUp.stop();
                 timerDown.stop();
                 isCollided = false;
-                y = oY;
+                ball.y = ball.oY;
                 currentLevel = 1;
                 level.setText("Level: " + currentLevel);
                 getActionMap().put("pressed", spacePressedUp);
                 obstacle.x = obstacle.originalX;
                 obstacle.speed = obstacle.originalSpeed;
-                dy = originaldy;
+                ball.dy = ball.originaldy;
                 repaint();
                 obstacleMove.start();
             }
@@ -163,7 +136,7 @@ class Main extends JPanel {
                 timerUp.stop();
                 timerDown.stop();
                 isCollided = false;
-                y = oY;
+                ball.y = ball.oY;
                 currentLevel = 1;
                 level.setText("Level: " + currentLevel);
                 getActionMap().put("pressed", spacePressedUp);
@@ -199,29 +172,6 @@ class Main extends JPanel {
         frame.setVisible(true);
     }
 
-    public void draw(Graphics g, Color color) {
-        g.setColor(color);
-        g.fillOval(x, y, 2*radius, 2*radius);
-    }
-
-    public void moveUp() {
-        y-=dy;
-        if(y < 130) {
-            timerUp.stop();
-            timerDown.start();
-            getActionMap().remove("pressed");
-        }
-    }
-
-    public void moveDown() {
-        y+=dy;
-        if(y == oY) {
-            timerDown.stop();
-            getActionMap().put("pressed", spacePressedUp);
-            dy++;
-        }
-    }
-
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         RenderingHints rh = new RenderingHints(
@@ -231,7 +181,7 @@ class Main extends JPanel {
         super.paintComponent(g2d);
         g2d.drawImage(icon.getImage(), 0, 0, null);
         obstacle.draw(g2d, obstacleColor);
-        draw(g2d, ballColor);
+        ball.draw(g2d, ballColor);
     }
 
     public static void main(String[] args) {
@@ -247,14 +197,73 @@ class Main extends JPanel {
         });
     }
 
-    public class Obstacle {
+    class Ball {
+        final int oX = 20;
+        final int oY = 430;
+        int x = oX;
+        int y = oY;
+        int radius = 15;
+        final int originaldy = 10;
+        int dy = originaldy;
+        int tempBalldy = dy;
+
+        public Ball() {
+            timerUp = new Timer(50, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    moveUp();
+                    repaint();
+                }
+            });
+
+            spacePressedUp = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    timerUp.start();
+                }
+            };
+
+            timerDown = new Timer(50, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    moveDown();
+                    repaint();
+                }
+            });
+
+            getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
+            getActionMap().put("pressed", spacePressedUp);
+        }
+
+        public void moveDown() {
+            y+=dy;
+            if(y == oY) {
+                timerDown.stop();
+                getActionMap().put("pressed", spacePressedUp);
+                dy = tempBalldy;
+            }
+        }
+
+        public void draw(Graphics g, Color color) {
+            g.setColor(color);
+            g.fillOval(x, y, 2*radius, 2*radius);
+        }
+
+        public void moveUp() {
+            y-=dy;
+            if(y < 130) {
+                timerUp.stop();
+                timerDown.start();
+                getActionMap().remove("pressed");
+            }
+        }
+    }
+
+    class Obstacle {
         final int originalX = 900;
         int x = originalX;
         int y = 380;
         int oX = 0;
         int width = 40;
         final int height = 80;
-        final int originalSpeed = 3;
+        final int originalSpeed = 5;
         int speed = originalSpeed;
 
         public void draw(Graphics g, Color color) {
@@ -267,9 +276,10 @@ class Main extends JPanel {
             x-=speed;
             if(x + width <= 0) {
                 x = originalX;
-                speed+=1.5;
+                speed+=1;
                 currentLevel++;
                 level.setText("Level: " + currentLevel);
+                ball.tempBalldy+=1;
             }
         }
     }
