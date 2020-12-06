@@ -23,6 +23,6 @@ It's Java, so compilation is same on most systems.
 From V2, Ball Runner uses a package, `src`, so compilation and running changes accordingly.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> javac src\Main.java
-> java src\Main.java
+> javac ball_runner\src\Main.java
+> java ball_runner\src\Main.java
 ```
