@@ -1,4 +1,4 @@
-package ball_runner;
+package src;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,11 +31,11 @@ class Main extends JPanel {
     Timer obstacleMove;
     boolean isCollided = false;
     int obstacleWidth = obstacle.width;
-    static URL bg = Main.class.getResource("img\\grass.jpg");
+    static URL bg = Main.class.getResource("img/grass.jpg");
 	static ImageIcon icon = new ImageIcon(bg);
-    static URL exp = Main.class.getResource("img\\explosion_nontransparent.png");
+    static URL exp = Main.class.getResource("img/explosion_nontransparent.png");
 	static ImageIcon explosionIcon = new ImageIcon(exp);
-    static URL gm = Main.class.getResource("img\\gameOver2.png");
+    static URL gm = Main.class.getResource("img/gameOver2.png");
 	static ImageIcon gmIcon = new ImageIcon(gm);
 
     public Main() {
