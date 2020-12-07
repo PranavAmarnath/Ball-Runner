@@ -9,6 +9,8 @@ import javax.swing.border.*;
 import javax.swing.Timer;
 import java.awt.event.*;
 import java.net.URL;
+import javax.sound.sampled.*;
+import java.io.File;
 
 class Main extends JPanel {
 
@@ -37,8 +39,13 @@ class Main extends JPanel {
 	static ImageIcon explosionIcon = new ImageIcon(exp);
     static URL gm = Main.class.getResource("img/gameOver2.png");
 	static ImageIcon gmIcon = new ImageIcon(gm);
+    SoundPlayer player;
 
     public Main() {
+        player = new SoundPlayer();
+        Thread playerThread = new Thread(player);
+        playerThread.start();
+
         createAndShowGUI();
 
         ball = new Ball();
@@ -185,6 +192,10 @@ class Main extends JPanel {
         g2d.drawImage(icon.getImage(), 0, 0, null);
         obstacle.draw(g2d, obstacleColor);
         ball.draw(g2d, ballColor);
+        if(isCollided) {
+            g2d.drawImage(explosionIcon.getImage(), ball.x-2*ball.radius, ball.y-2*ball.radius, null);
+            g2d.drawImage(gmIcon.getImage(), width/4, height/4, null);
+        }
     }
 
     public static void main(String[] args) {
@@ -220,6 +231,11 @@ class Main extends JPanel {
 
             spacePressedUp = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
+                    /*
+                    new Thread(() -> {
+                        player.playSound();
+                    });
+                    */
                     timerUp.start();
                 }
             };
@@ -284,6 +300,45 @@ class Main extends JPanel {
                 level.setText("Level: " + currentLevel);
                 ball.tempBalldy+=1;
             }
+        }
+    }
+
+    class SoundPlayer implements Runnable {
+
+        URL fileName = SoundPlayer.class.getResource("img/theme1.wav");
+        URL boing = SoundPlayer.class.getResource("img/boing.wav");
+
+        private synchronized void playBgSound() {
+            /*
+               Domain: filename of type String
+               Range: void type, output: plays background music on its own thread
+            */
+            try {
+                AudioInputStream ais = AudioSystem.getAudioInputStream(fileName);
+                Clip clip = AudioSystem.getClip();
+                clip.open(ais);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                clip.start();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        synchronized void playSound() {
+            try {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(boing));
+                clip.start();
+
+                Thread.sleep(clip.getMicrosecondLength() / 1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void run() {
+            playBgSound();
         }
     }
 
