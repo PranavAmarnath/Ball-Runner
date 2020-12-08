@@ -1,4 +1,4 @@
-package src;
+package ball_runner;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +7,7 @@ import javax.swing.text.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 import javax.swing.Timer;
+import javax.swing.plaf.*;
 import java.awt.event.*;
 import java.net.URL;
 import javax.sound.sampled.*;
@@ -19,11 +20,14 @@ class Main extends JPanel {
     int height = 576;
     JMenuBar menuBar;
     JMenu fileMenu, preferencesMenu;
-    JMenuItem restartItem, colorBallItem, colorObstacleItem;
+    JMenuItem restartItem, colorBallItem, colorObstacleItem, soundController;
+    JCheckBox bgSoundCheckbox;
+    float checkboxValue;
+    JDialog soundDialog;
     JColorChooser ballChooser, obstacleChooser;
     Color ballColor = Color.BLACK;
     Color obstacleColor = Color.BLACK;
-    JPanel mainPanel, textPanel, gamePanel;
+    JPanel mainPanel, textPanel, gamePanel, soundPanel;
     JLabel level;
     int currentLevel = 1;
     Timer timerUp, timerDown;
@@ -32,6 +36,7 @@ class Main extends JPanel {
     Obstacle obstacle = new Obstacle();
     Timer obstacleMove;
     boolean isCollided = false;
+    CardLayout cl;
     int obstacleWidth = obstacle.width;
     static URL bg = Main.class.getResource("img/grass.jpg");
 	static ImageIcon icon = new ImageIcon(bg);
@@ -40,6 +45,7 @@ class Main extends JPanel {
     static URL gm = Main.class.getResource("img/gameOver2.png");
 	static ImageIcon gmIcon = new ImageIcon(gm);
     SoundPlayer player;
+    FloatControl gainControl;
 
     public Main() {
         player = new SoundPlayer();
@@ -68,13 +74,17 @@ class Main extends JPanel {
                     getActionMap().remove("pressed");
                     timerUp.stop();
                     timerDown.stop();
+                    Object[] options = {};
+                    int option = JOptionPane.showConfirmDialog(frame, "Would you like to restart?");
+                    if(option == 0) {
+                        restart();
+                    }
                 }
             }
         });
-        obstacleMove.start();
     }
 
-    public void createAndShowGUI() {
+    void createAndShowGUI() {
         frame = new JFrame("Ball Runner Copyright \u00a9 2020 by Three Goats");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(width, height));
@@ -86,7 +96,7 @@ class Main extends JPanel {
         textPanel = new JPanel(new BorderLayout());
         textPanel.setBorder(new EmptyBorder(150, 150, 150, 150));
         mainPanel.add("welcome", textPanel);
-        CardLayout cl = (CardLayout)(mainPanel.getLayout());
+        cl = (CardLayout)(mainPanel.getLayout());
         cl.show(mainPanel, "welcome");
 
         menuBar = new JMenuBar();
@@ -111,9 +121,12 @@ class Main extends JPanel {
                 obstacleMove.start();
             }
         });
+        restartItem.setAccelerator(KeyStroke.getKeyStroke('R',
+                                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         frame.setJMenuBar(menuBar);
 
         preferencesMenu = new JMenu("Preferences");
+
         colorBallItem = new JMenuItem("Ball Color");
         colorBallItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -132,6 +145,53 @@ class Main extends JPanel {
             }
         });
         preferencesMenu.add(colorBallItem);
+
+        colorObstacleItem = new JMenuItem("Obstacle Color");
+        colorObstacleItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                obstacleChooser = new JColorChooser();
+                obstacleChooser.setColor(Color.BLACK);
+                obstacleChooser.setBorder(BorderFactory.createTitledBorder("Choose Obstacle Color"));
+                obstacleChooser.getSelectionModel().addChangeListener(new ChangeListener() {
+                    public void stateChanged(ChangeEvent arg0) {
+                        Color color = obstacleChooser.getColor();
+                        obstacleColor = color;
+                        repaint();
+                    }
+                });
+                JDialog dialog = JColorChooser.createDialog(null, "Color Chooser", true, obstacleChooser, null, null);
+                dialog.setVisible(true);
+            }
+        });
+        preferencesMenu.add(colorObstacleItem);
+
+        soundController = new JMenuItem("Sound");
+        soundDialog = new JDialog(frame, "Sound Controls");
+        soundDialog.setVisible(false);
+        soundPanel = new JPanel();
+        bgSoundCheckbox = new JCheckBox("Enable Sound", true);
+        soundController.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                soundDialog.setVisible(true);
+                bgSoundCheckbox.addItemListener(new ItemListener() {
+                   public void itemStateChanged(ItemEvent e) {
+                       if(e.getStateChange() == ItemEvent.SELECTED) {
+                           gainControl.setValue(0.0f);
+                       }
+                       else {
+                           gainControl.setValue(-80.0f);
+                       }
+                   }
+                });
+                soundDialog.add(soundPanel);
+                soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+                soundPanel.add(bgSoundCheckbox);
+                soundDialog.pack();
+                soundDialog.setVisible(true);
+            }
+        });
+        preferencesMenu.add(soundController);
+
         menuBar.add(preferencesMenu);
 
         gamePanel = new JPanel(new BorderLayout());
@@ -140,19 +200,7 @@ class Main extends JPanel {
         button.setFocusPainted(false);
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cl.show(mainPanel, "game");
-                // Restart logic
-                restartItem.setEnabled(true);
-                timerUp.stop();
-                timerDown.stop();
-                isCollided = false;
-                ball.y = ball.oY;
-                currentLevel = 1;
-                level.setText("Level: " + currentLevel);
-                getActionMap().put("pressed", spacePressedUp);
-                obstacle.x = obstacle.originalX;
-                obstacle.speed = obstacle.originalSpeed;
-                repaint();
+                restart();
                 obstacleMove.start();
             }
         });
@@ -182,6 +230,23 @@ class Main extends JPanel {
         frame.setVisible(true);
     }
 
+    void restart() {
+        cl.show(mainPanel, "game");
+        // Restart logic
+        restartItem.setEnabled(true);
+        timerUp.stop();
+        timerDown.stop();
+        isCollided = false;
+        ball.y = ball.oY;
+        currentLevel = 1;
+        level.setText("Level: " + currentLevel);
+        getActionMap().put("pressed", spacePressedUp);
+        obstacle.x = obstacle.originalX;
+        obstacle.speed = obstacle.originalSpeed;
+        repaint();
+        obstacleMove.start();
+    }
+
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         RenderingHints rh = new RenderingHints(
@@ -196,19 +261,6 @@ class Main extends JPanel {
             g2d.drawImage(explosionIcon.getImage(), ball.x-2*ball.radius, ball.y-2*ball.radius, null);
             g2d.drawImage(gmIcon.getImage(), width/4, height/4, null);
         }
-    }
-
-    public static void main(String[] args) {
-        System.setProperty("apple.laf.useScreenMenuBar", "true"); // for picky mac users
-		System.setProperty("apple.awt.application.name", "Ball Runner"); // mac header on mac menubar
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(Exception e) { }
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Main();
-            }
-        });
     }
 
     class Ball {
@@ -251,7 +303,7 @@ class Main extends JPanel {
             getActionMap().put("pressed", spacePressedUp);
         }
 
-        public void moveDown() {
+        private void moveDown() {
             y+=dy;
             if(y == oY) {
                 timerDown.stop();
@@ -260,12 +312,12 @@ class Main extends JPanel {
             }
         }
 
-        public void draw(Graphics g, Color color) {
+        private void draw(Graphics g, Color color) {
             g.setColor(color);
             g.fillOval(x, y, 2*radius, 2*radius);
         }
 
-        public void moveUp() {
+        private void moveUp() {
             y-=dy;
             if(y < 130) {
                 timerUp.stop();
@@ -317,6 +369,7 @@ class Main extends JPanel {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(fileName);
                 Clip clip = AudioSystem.getClip();
                 clip.open(ais);
+                gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
                 clip.start();
             } catch(Exception e){
@@ -340,6 +393,19 @@ class Main extends JPanel {
         public void run() {
             playBgSound();
         }
+    }
+
+    public static void main(String[] args) {
+        System.setProperty("apple.laf.useScreenMenuBar", "true"); // for picky mac users
+		System.setProperty("apple.awt.application.name", "Ball Runner"); // mac header on mac menubar
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) { e.printStackTrace(); }
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Main();
+            }
+        });
     }
 
 }
