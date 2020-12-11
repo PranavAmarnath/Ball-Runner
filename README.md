@@ -20,7 +20,7 @@ It's Java, so compilation is same on most systems.
 > java Main
 ```
 #### V2:
-From V2, Ball Runner uses a package, `src`, so compilation and running changes accordingly.
+From V2, Ball Runner uses a package, `ball_runner`, so compilation and running changes accordingly.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
 > javac ball_runner\Main.java
@@ -28,7 +28,7 @@ From V2, Ball Runner uses a package, `src`, so compilation and running changes a
 ```
 
 ### JAR Creation (Described from command line using `java` and `jar` tool):
-From V2, Ball Runner uses a package, `src`, so compilation and running changes accordingly.
+From V2, Ball Runner uses a package, `ball_runner`, so compilation and running changes accordingly.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
 > jar cfm jarexample.jar MANIFEST.mf ball_runner\"*".class ball_runner\img\"*"."*"
