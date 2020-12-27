@@ -3,7 +3,7 @@ A game where an object has to avoid obstacles. The player must press <kbd>SPACE<
 
 ---------------------------------------------------------------------------------------------------
 
-## Coming Soon: New Release (V2)!
+## UPDATE: New Release (V2)!
 
 ### (c) aditya2604, PranavAmarnath, sidhullur12.
 This product is licensed under the MIT License. See LICENSE for more details.
