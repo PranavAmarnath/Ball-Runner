@@ -45,5 +45,5 @@ From V2, Ball Runner uses a package, `ball_runner`, so compilation and running c
 JDK11:
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> jar cfm jarexample.jar MANIFEST.mf ball_runner
+> jar cfm jarexample_JDK11.jar MANIFEST.mf ball_runner
 > java -jar jarexample_JDK11.jar
