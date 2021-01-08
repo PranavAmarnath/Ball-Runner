@@ -13,8 +13,13 @@ This product is licensed under the MIT License. See LICENSE for more details.
 #### Unless otherwise stated, all commands use Java SE 15.
 ### Compilation (Described from command line using `java` tool):
 It's Java, so compilation is same on most systems.
+<br />
 Minimum Supported Java Version: JDK11.
+<br />
+**NOTE: The following commands may vary on different platforms. Test, test, test different commands, but they will be very similar to those described.**
+<br />
 **NOTE: All paths described are only for demonstration of tree structure. Please change directory path during compilation and running accordingly.**
+<br />
 #### V1:
 ```java
 // If using release v1.0 Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal-1.0\"
@@ -32,18 +37,18 @@ From V2, Ball Runner uses a package, `ball_runner`, so compilation and running c
 JDK11:
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> javac ball_runner\Main.java
+> javac ball_runner/Main.java
 > java ball_runner.Main
 ```
 ### JAR Creation (Described from command line using `java` and `jar` tool):
 From V2, Ball Runner uses a package, `ball_runner`, so compilation and running changes accordingly.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> jar cfm jarexample.jar MANIFEST.mf ball_runner\"*".class ball_runner\img\"*"."*"
+> jar cfm jarexample.jar MANIFEST.MF ball_runner\"*".class ball_runner\img\"*"."*"
 > java -jar jarexample.jar
 ```
 JDK11:
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> jar cfm jarexample_JDK11.jar MANIFEST.mf ball_runner
+> jar cfm jarexample_JDK11.jar MANIFEST.MF ball_runner
 > java -jar jarexample_JDK11.jar
