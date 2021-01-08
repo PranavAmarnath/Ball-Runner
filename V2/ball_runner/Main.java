@@ -90,6 +90,20 @@ class Main extends JPanel {
         frame.setPreferredSize(new Dimension(width, height));
         frame.setResizable(false);
 
+        Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+		URL imageResource = Main.class.getResource("img/gear.png"); // URL: https://cdn.pixabay.com/photo/2012/05/04/10/57/gear-47203_1280.png
+		Image image = defaultToolkit.getImage(imageResource);
+
+		try {
+			// this is new since JDK 9
+			Taskbar taskbar = Taskbar.getTaskbar();
+			// set icon for mac os (and other systems which do support this method)
+			taskbar.setIconImage(image);
+		} catch (UnsupportedOperationException e) {
+			// set icon for windows (and other systems which do support this method)
+			frame.setIconImage(image);
+		}
+
         mainPanel = new JPanel(new CardLayout());
         frame.add(mainPanel);
 
@@ -190,6 +204,22 @@ class Main extends JPanel {
                 soundDialog.setVisible(true);
             }
         });
+        try {
+            Desktop desktop = Desktop.getDesktop();
+
+            desktop.setAboutHandler(e ->
+                JOptionPane.showMessageDialog(null, "About dialog")
+            );
+            desktop.setPreferencesHandler(e -> {
+                soundDialog.setVisible(true);
+            });
+            desktop.setQuitHandler((e,r) -> {
+            	int input = JOptionPane.showConfirmDialog(frame, "Are you sure you want to quit?");
+            	if(input == 0) {
+            		System.exit(0);
+                }
+            });
+        } catch(Exception e) {}
         preferencesMenu.add(soundController);
 
         menuBar.add(preferencesMenu);
