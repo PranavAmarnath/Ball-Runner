@@ -184,6 +184,11 @@ class Main extends JPanel {
         soundDialog.setVisible(false);
         soundPanel = new JPanel();
         bgSoundCheckbox = new JCheckBox("Enable Sound", true);
+        soundDialog.add(soundPanel);
+                soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+                soundPanel.add(bgSoundCheckbox);
+                soundDialog.pack();
+                soundDialog.setVisible(true);
         soundController.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 soundDialog.setVisible(true);
@@ -197,11 +202,6 @@ class Main extends JPanel {
                        }
                    }
                 });
-                soundDialog.add(soundPanel);
-                soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-                soundPanel.add(bgSoundCheckbox);
-                soundDialog.pack();
-                soundDialog.setVisible(true);
             }
         });
         try {
