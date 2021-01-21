@@ -184,31 +184,31 @@ class Main extends JPanel {
         soundDialog.setVisible(false);
         soundPanel = new JPanel();
         bgSoundCheckbox = new JCheckBox("Enable Sound", true);
+        bgSoundCheckbox.addItemListener(new ItemListener() {
+           public void itemStateChanged(ItemEvent e) {
+               if(e.getStateChange() == ItemEvent.SELECTED) {
+                   gainControl.setValue(0.0f);
+               }
+               else {
+                   gainControl.setValue(-80.0f);
+               }
+           }
+        });
+        soundDialog.add(soundPanel);
+        soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        soundPanel.add(bgSoundCheckbox);
+        soundDialog.pack();
         soundController.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 soundDialog.setVisible(true);
-                bgSoundCheckbox.addItemListener(new ItemListener() {
-                   public void itemStateChanged(ItemEvent e) {
-                       if(e.getStateChange() == ItemEvent.SELECTED) {
-                           gainControl.setValue(0.0f);
-                       }
-                       else {
-                           gainControl.setValue(-80.0f);
-                       }
-                   }
-                });
-                soundDialog.add(soundPanel);
-                soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-                soundPanel.add(bgSoundCheckbox);
-                soundDialog.pack();
-                soundDialog.setVisible(true);
+                //soundDialog.setVisible(true);
             }
         });
         try {
             Desktop desktop = Desktop.getDesktop();
 
             desktop.setAboutHandler(e ->
-                JOptionPane.showMessageDialog(null, "About dialog")
+                JOptionPane.showMessageDialog(frame, "About dialog")
             );
             desktop.setPreferencesHandler(e -> {
                 soundDialog.setVisible(true);
