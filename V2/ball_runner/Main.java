@@ -184,7 +184,10 @@ class Main extends JPanel {
         soundDialog.setVisible(false);
         soundPanel = new JPanel();
         bgSoundCheckbox = new JCheckBox("Enable Sound", true);
-<<<<<<< HEAD
+        soundDialog.add(soundPanel);
+        soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        soundPanel.add(bgSoundCheckbox);
+        soundDialog.pack();
         bgSoundCheckbox.addItemListener(new ItemListener() {
            public void itemStateChanged(ItemEvent e) {
                if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -195,29 +198,9 @@ class Main extends JPanel {
                }
            }
         });
-=======
->>>>>>> 5271d5922e1d1a2beb384a7edfabb30117eb01d3
-        soundDialog.add(soundPanel);
-        soundPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        soundPanel.add(bgSoundCheckbox);
-        soundDialog.pack();
         soundController.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 soundDialog.setVisible(true);
-<<<<<<< HEAD
-                //soundDialog.setVisible(true);
-=======
-                bgSoundCheckbox.addItemListener(new ItemListener() {
-                   public void itemStateChanged(ItemEvent e) {
-                       if(e.getStateChange() == ItemEvent.SELECTED) {
-                           gainControl.setValue(0.0f);
-                       }
-                       else {
-                           gainControl.setValue(-80.0f);
-                       }
-                   }
-                });
->>>>>>> 5271d5922e1d1a2beb384a7edfabb30117eb01d3
             }
         });
         try {
