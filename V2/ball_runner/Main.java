@@ -121,18 +121,7 @@ class Main extends JPanel {
         fileMenu.add(restartItem);
         restartItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                timerUp.stop();
-                timerDown.stop();
-                isCollided = false;
-                ball.y = ball.oY;
-                currentLevel = 1;
-                level.setText("Level: " + currentLevel);
-                getActionMap().put("pressed", spacePressedUp);
-                obstacle.x = obstacle.originalX;
-                obstacle.speed = obstacle.originalSpeed;
-                ball.dy = ball.originaldy;
-                repaint();
-                obstacleMove.start();
+                restart();
             }
         });
         restartItem.setAccelerator(KeyStroke.getKeyStroke('R',
@@ -272,6 +261,7 @@ class Main extends JPanel {
         getActionMap().put("pressed", spacePressedUp);
         obstacle.x = obstacle.originalX;
         obstacle.speed = obstacle.originalSpeed;
+        ball.dy = ball.originaldy;
         repaint();
         obstacleMove.start();
     }
