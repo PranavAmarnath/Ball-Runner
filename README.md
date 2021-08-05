@@ -3,20 +3,27 @@ A game where an object has to avoid obstacles. The player must press <kbd>SPACE<
 
 ---------------------------------------------------------------------------------------------------
 
-## UPDATE: New Release (V2)!
-
 ### (c) aditya2604, PranavAmarnath, sidhullur12.
 This product is licensed under the MIT License. See LICENSE for more details.
+#### Unless otherwise stated, all commands have been tested with Java SE 15 though they should work with later versions.
 
 ---------------------------------------------------------------------------------------------------
 
-#### Unless otherwise stated, all commands use Java SE 15.
+### Running (Described from command line using `java` tool):
+Double-click the JAR file. If this doesn't work, try the below steps.
+```java
+// Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
+> java -jar jarexample.jar
+// OR
+> java -jar jarexample_JDK11.jar
+```
+There is no JAR file for V1.
 ### Compilation (Described from command line using `java` tool):
 It's Java, so compilation is same on most systems.
 <br />
 Minimum Supported Java Version: JDK11.
 <br />
-**NOTE: The following commands may vary on different platforms. Test, test, test different commands, but they will be very similar to those described.**
+**NOTE: The following commands may vary on different platforms. Test different commands, but they will be very similar to those described.**
 <br />
 **NOTE: All paths described are only for demonstration of tree structure. Please change directory path during compilation and running accordingly.**
 <br />
@@ -40,7 +47,7 @@ JDK11:
 > javac ball_runner/Main.java
 > java ball_runner.Main
 ```
-### JAR Creation (Described from command line using `java` and `jar` tool):
+### JAR Creation (Described from command line using `java` and `jar` tools):
 From V2, Ball Runner uses a package, `ball_runner`, so compilation and running changes accordingly.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
