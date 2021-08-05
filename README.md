@@ -58,3 +58,6 @@ JDK11:
 
 ### Gameplay
 https://user-images.githubusercontent.com/59426357/128301046-507f1286-d982-48b1-9f69-f9c2978fdddc.mov
+
+### Game Preferences
+https://user-images.githubusercontent.com/59426357/128302597-6e9c1212-1da8-4c59-9eda-b3dc954a497e.mov
