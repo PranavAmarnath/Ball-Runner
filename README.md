@@ -26,6 +26,7 @@ Minimum Supported Java Version: JDK11.
 > java Main
 ```
 ### V2:
+#### Running (Described from command line using `java` tool):
 Double-click the JAR file present in the folder. If this doesn't work, try the below steps in command line.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
