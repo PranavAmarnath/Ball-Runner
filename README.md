@@ -9,15 +9,6 @@ This product is licensed under the MIT License. See LICENSE for more details.
 
 ---------------------------------------------------------------------------------------------------
 
-### Running (Described from command line using `java` tool):
-Double-click the JAR file. If this doesn't work, try the below steps.
-```java
-// Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> java -jar jarexample.jar
-// OR
-> java -jar jarexample_JDK11.jar
-```
-There is no JAR file for V1.
 ### Compilation (Described from command line using `java` tool):
 It's Java, so compilation is same on most systems.
 <br />
@@ -27,27 +18,24 @@ Minimum Supported Java Version: JDK11.
 <br />
 **NOTE: All paths described are only for demonstration of tree structure. Please change directory path during compilation and running accordingly.**
 <br />
-#### V1:
+### V1:
 ```java
 // If using release v1.0 Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal-1.0\"
 // If cloning Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V1\"
 > javac Main.java
 > java Main
 ```
-#### V2:
-From V2, Ball Runner uses a package, `ball_runner`, so compilation and running changes accordingly.
+### V2:
+#### Running (Described from command line using `java` tool):
+Double-click the JAR file present in the folder. If this doesn't work, try the below steps in command line.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> javac ball_runner\Main.java
-> java ball_runner\Main.java
+> java -jar jarexample.jar
+// OR
+> java -jar jarexample_JDK11.jar
 ```
-JDK11:
-```java
-// Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
-> javac ball_runner/Main.java
-> java ball_runner.Main
-```
-### JAR Creation (Described from command line using `java` and `jar` tools):
+If the JAR file does not work, create your own by trying the below steps.
+#### JAR Creation (Described from command line using `java` and `jar` tools):
 From V2, Ball Runner uses a package, `ball_runner`, so compilation and running changes accordingly.
 ```java
 // Directory -> "C:\Users\Jon Doe\Downloads\CompProgFinal\V2\"
